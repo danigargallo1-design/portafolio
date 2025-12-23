@@ -628,6 +628,65 @@ form button:hover{
 }
 
 
+/* ===================== */
+/* ===== HORARIOS ====== */
+/* ===================== */
+
+#horarios{
+  background: #f4efe6;
+  text-align: center;
+}
+
+.horarios-box{
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+.dia{
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px;
+  font-size: .95rem;
+  background: #faf8f3;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dia:nth-child(even){
+  background: #f1ede4;
+}
+
+.dia span:last-child{
+  font-weight: 600;
+  color: var(--oscuro);
+}
+
+.dia .cerrado{
+  color: #a63838;
+  font-weight: 600;
+}
+
+.nota-horarios{
+  margin-top: 16px;
+  font-size: .85rem;
+  color: #777;
+  font-style: italic;
+}
+
+/* ----- MÓVIL ----- */
+@media(max-width:768px){
+  .horarios-box{
+    max-width: 100%;
+  }
+
+  .dia{
+    font-size: .9rem;
+    padding: 14px 16px;
+  }
+}
 
 /* FOOTER */
 
@@ -1055,148 +1114,173 @@ button, a, .plato, .foto{
 </head>
 <body>
 
+
 <div class="page">
 
-<body>
-
-<nav>
+  <!-- NAV -->
+  <nav>
     <div class="logo">La Antigua Mesa</div>
     <div class="menu" id="menu">
-        <a href="#carta">Carta</a>
-        <a href="#galeria">Galería</a>
-        <a href="#ubicacion">Ubicación</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#resenas">Reseñas</a>
-        <a href="reservas.html">Reservas</a>
+      <a href="#carta">Carta</a>
+      <a href="#galeria">Galería</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="reservas.html">Reservas</a>
     </div>
     <div class="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
     </div>
-</nav>
+  </nav>
 
-<header>
-<div>
-<h1>La Antigua Mesa</h1>
-<p><p>Cocina de toda la vida, hecha como antes</p>
-</p>
-<a href="reservas.html" class="btn-reservas">Reservar ahora</a>
-</div>
-</header>
-
-<section id="carta">
-  <h2>Nuestra Carta</h2>
-
-  <div class="filtros">
-    <button class="activo" onclick="filtrar('todo',this)">Todo</button>
-    <button onclick="filtrar('entrante',this)">Entrantes</button>
-    <button onclick="filtrar('principal',this)">Platos principales</button>
-    <button onclick="filtrar('postre',this)">Postres</button>
-  </div>
-
-  <div class="menu-carta">
-
-    <div class="plato entrante">
-      <h3>Jamón Ibérico de Bellota <span class="precio">18€</span></h3>
-      <p>Corte a cuchillo con pan cristal.</p>
+  <!-- HERO -->
+  <header>
+    <div>
+      <h1>La Antigua Mesa</h1>
+      <p>Cocina de toda la vida, hecha como antes</p>
+      <a href="reservas.html" class="btn-reservas">Reservar ahora</a>
     </div>
+  </header>
 
-    <div class="plato entrante">
-      <h3>Quesos Artesanos <span class="precio">14€</span></h3>
-      <p>Selección nacional con mermeladas.</p>
-    </div>
+  <!-- HORARIOS -->
+  <section id="horarios">
+    <h2>Horario</h2>
 
-    <div class="plato entrante">
-      <h3>Burrata con Tomate Rosa <span class="precio">13€</span></h3>
-      <p>Burrata fresca, tomate y pesto suave.</p>
-    </div>
-
-    <div class="plato principal">
-      <h3>Cordero Asado <span class="precio">22€</span></h3>
-      <p>Horno de leña con hierbas.</p>
-    </div>
-
-    <div class="plato principal">
-      <h3>Solomillo de Ternera <span class="precio">24€</span></h3>
-      <p>A la parrilla con vino tinto.</p>
+    <div class="horarios-box">
+      <div class="dia">
+        <span>Lunes</span>
+        <span class="cerrado">Cerrado</span>
+      </div>
+      <div class="dia">
+        <span>Martes</span>
+        <span>13:00 – 16:00</span>
+      </div>
+      <div class="dia">
+        <span>Miércoles</span>
+        <span>13:00 – 16:00</span>
+      </div>
+      <div class="dia">
+        <span>Jueves</span>
+        <span>13:00 – 16:00</span>
+      </div>
+      <div class="dia">
+        <span>Viernes</span>
+        <span>13:00 – 16:00 · 20:00 – 23:30</span>
+      </div>
+      <div class="dia">
+        <span>Sábado</span>
+        <span>13:00 – 16:00 · 20:00 – 23:30</span>
+      </div>
+      <div class="dia">
+        <span>Domingo</span>
+        <span>13:00 – 16:00</span>
+      </div>
     </div>
 
-    <div class="plato principal">
-      <h3>Bacalao al Pil-Pil <span class="precio">21€</span></h3>
-      <p>Con verduras de temporada.</p>
+    <p class="nota-horarios">Horario sujeto a festivos</p>
+  </section>
+
+
+    <!-- CARTA -->
+  <section id="carta">
+    <h2>Nuestra Carta</h2>
+
+    <div class="filtros">
+      <button class="activo" onclick="filtrar('todo',this)">Todo</button>
+      <button onclick="filtrar('entrante',this)">Entrantes</button>
+      <button onclick="filtrar('principal',this)">Platos principales</button>
+      <button onclick="filtrar('postre',this)">Postres</button>
     </div>
 
-    <div class="plato principal">
-      <h3>Risotto de Setas <span class="precio">17€</span></h3>
-      <p>Cremoso con aceite de trufa.</p>
+    <div class="menu-carta">
+
+      <div class="plato entrante">
+        <h3>Jamón Ibérico de Bellota <span class="precio">18€</span></h3>
+        <p>Corte a cuchillo con pan cristal.</p>
+      </div>
+
+      <div class="plato entrante">
+        <h3>Quesos Artesanos <span class="precio">14€</span></h3>
+        <p>Selección nacional con mermeladas.</p>
+      </div>
+
+      <div class="plato entrante">
+        <h3>Burrata con Tomate Rosa <span class="precio">13€</span></h3>
+        <p>Burrata fresca, tomate y pesto suave.</p>
+      </div>
+
+      <div class="plato principal">
+        <h3>Cordero Asado <span class="precio">22€</span></h3>
+        <p>Horno de leña con hierbas.</p>
+      </div>
+
+      <div class="plato principal">
+        <h3>Solomillo de Ternera <span class="precio">24€</span></h3>
+        <p>A la parrilla con vino tinto.</p>
+      </div>
+
+      <div class="plato principal">
+        <h3>Bacalao al Pil-Pil <span class="precio">21€</span></h3>
+        <p>Con verduras de temporada.</p>
+      </div>
+
+      <div class="plato principal">
+        <h3>Risotto de Setas <span class="precio">17€</span></h3>
+        <p>Cremoso con aceite de trufa.</p>
+      </div>
+
+      <div class="plato postre">
+        <h3>Torrija Caramelizada <span class="precio">8€</span></h3>
+        <p>Con helado de vainilla.</p>
+      </div>
+
     </div>
+  </section>
+  <!-- UBICACIÓN -->
+  <section id="ubicacion">
+    <h2>Dónde estamos</h2>
+    <iframe
+      src="https://www.google.com/maps?q=Puerta%20del%20Sol%20Madrid&output=embed"
+      width="100%"
+      height="400"
+      style="border-radius:18px;border:none">
+    </iframe>
+  </section>
 
-    <div class="plato postre">
-      <h3>Torrija Caramelizada <span class="precio">8€</span></h3>
-      <p>Con helado de vainilla.</p>
+
+
+  <!-- GALERÍA -->
+  <section id="galeria">
+    <h2>Así se vive La Antigua Mesa</h2>
+
+    <div class="galeria">
+      <div class="foto scroll">
+        <img src="https://images.unsplash.com/photo-1627526728741-3cbc44345010?fm=jpg&q=60&w=900"
+             loading="lazy" decoding="async"
+             onclick="abrirModal(this)">
+      </div>
+
+      <div class="foto scroll">
+        <img src="https://media-cdn.tripadvisor.com/media/photo-m/1280/22/72/33/57/restaurant.jpg"
+             loading="lazy" decoding="async"
+             onclick="abrirModal(this)">
+      </div>
+
+      <div class="foto scroll">
+        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=900"
+             loading="lazy" decoding="async"
+             onclick="abrirModal(this)">
+      </div>
+
+      <div class="foto scroll">
+        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=900"
+             loading="lazy" decoding="async"
+             onclick="abrirModal(this)">
+      </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-
-<section id="galeria">
-<h2><h2>Así se vive La Antigua Mesa</h2>
-</h2>
-
-<div class="galeria">
-
-    <div class="foto scroll">
-        <img
-            src="https://images.unsplash.com/photo-1627526728741-3cbc44345010?fm=jpg&q=60&w=900"
-            loading="lazy"
-            decoding="async"
-            onclick="abrirModal(this)"
-            alt="Restaurante vintage interior">
-    </div>
-
-    <div class="foto scroll">
-        <img
-            src="https://media-cdn.tripadvisor.com/media/photo-m/1280/22/72/33/57/restaurant.jpg"
-            loading="lazy"
-            decoding="async"
-            onclick="abrirModal(this)"
-            alt="Comedor restaurante clásico">
-    </div>
-
-    <div class="foto scroll">
-        <img
-            src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=900"
-            loading="lazy"
-            decoding="async"
-            onclick="abrirModal(this)"
-            alt="Mesa restaurante antiguo">
-    </div>
-
-    <div class="foto scroll">
-        <img
-            src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=900"
-            loading="lazy"
-            decoding="async"
-            onclick="abrirModal(this)"
-            alt="Interior restaurante tradicional">
-    </div>
-
-</div>
-
-</body>
-
-
-
-<section id="contacto">
-<h2>Contacto</h2>
-<form onsubmit="event.preventDefault();alert('Mensaje enviado')">
-<input placeholder="Nombre" required>
-<input type="email" placeholder="Correo" required>
-<textarea placeholder="Mensaje" required></textarea>
-<button>Enviar mensaje</button>
-</form>
-</div>
-
+  <!-- RESEÑAS -->
 <section id="resenas">
   <h2>Reseñas</h2>
 
@@ -1402,6 +1486,22 @@ const textoInput=document.getElementById("texto");
 cargarResenas();
 </script>
 
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <form onsubmit="event.preventDefault();alert('Mensaje enviado')">
+      <input placeholder="Nombre" required>
+      <input type="email" placeholder="Correo" required>
+      <textarea placeholder="Mensaje" required></textarea>
+      <button>Enviar mensaje</button>
+    </form>
+  </section>
+
+</div>
+
+<!-- MODAL + TOAST -->
+<div id="modal" onclick="cerrarModal()"><img id="modalImg"></div>
+<div id="toast"></div>
 
 <script>
 function filtrar(tipo, btn){
@@ -1445,12 +1545,10 @@ elementosScroll.forEach(el => {
 
 
 </script>
-<section id="ubicacion">
-<h2><h2>Dónde estamos</h2>
-</h2>
-<iframe src="https://www.google.com/maps?q=Puerta%20del%20Sol%20Madrid&output=embed" width="100%" height="400" style="border-radius:18px;border:none"></iframe>
-</section>
 
+
+
+<!-- FOOTER -->
 <footer class="fade-in">
     <div class="footer-social">
         <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
@@ -1472,5 +1570,5 @@ elementosScroll.forEach(el => {
     </div>
     <p>© 2025 La antigua mesa. Todos los derechos reservados.</p>
 </footer>
+
 </body>
-</html>
