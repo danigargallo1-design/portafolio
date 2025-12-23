@@ -253,7 +253,30 @@ section:not(.hero)::before{
   font-weight:700;
   color:var(--accent);
 }
+/* =====================================================
+   HORARIO
+===================================================== */
+.horario{
+  max-width:420px;
+  margin:0 auto;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:26px;
+  box-shadow:var(--shadow);
+}
 
+.horario-item{
+  display:flex;
+  justify-content:space-between;
+  font-size:1.05rem;
+  padding:10px 0;
+  border-bottom:1px dashed var(--line);
+}
+
+.horario-item:last-child{
+  border-bottom:none;
+}
 /* =====================================================
    GALERÍA
 ===================================================== */
@@ -280,30 +303,7 @@ section:not(.hero)::before{
   border:2px solid var(--line);
 }
 
-/* =====================================================
-   HORARIO
-===================================================== */
-.horario{
-  max-width:420px;
-  margin:0 auto;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:6px;
-  padding:26px;
-  box-shadow:var(--shadow);
-}
 
-.horario-item{
-  display:flex;
-  justify-content:space-between;
-  font-size:1.05rem;
-  padding:10px 0;
-  border-bottom:1px dashed var(--line);
-}
-
-.horario-item:last-child{
-  border-bottom:none;
-}
 
 .horario-item strong{
   color:var(--accent);
@@ -566,7 +566,13 @@ footer{
 * {
   -webkit-tap-highlight-color: transparent;
 }
+section .horario {
+  opacity: 0.85;
+}
 
+.horario {
+  margin-top: 20px;
+}
 </style>
 
 
@@ -584,32 +590,17 @@ footer{
   <div class="hero-content">
     <h2>El Buen Trago</h2>
     <p>Un bar de barrio para tomar algo tranquilo y sentirse como en casa</p>
-    <a class="btn-whatsapp" id="btnReservar">Reservar mesa</a>
-  </div>
-</section>
-<section class="reveal">
-  <h3 class="section-title reveal">Horario</h3>
+    <a class="btn-whatsapp" href="https://wa.me/34643613245" target="_blank">
+  Reservar mesa
+</a>
 
-  <div class="horario">
-    <div class="horario-item">
-      <span>Lunes a Jueves</span>
-      <strong>09:00 – 23:00</strong>
-    </div>
-
-    <div class="horario-item">
-      <span>Viernes y Sábado</span>
-      <strong>09:00 – 01:00</strong>
-    </div>
-
-    <div class="horario-item">
-      <span>Domingo</span>
-      <strong>Cerrado</strong>
-    </div>
   </div>
 </section>
 
+
 <section class="reveal">
-  <h3 class="section-title reveal">Lo que más se pide</h3>
+  <h3 class="section-title">Lo que más se pide</h3>
+
   <div class="menu">
     <div class="menu-card reveal">
       <h4>Tapa de Jamón</h4>
@@ -655,6 +646,27 @@ footer{
   </div>
 </section>
 
+<section class="reveal">
+  <h3 class="section-title">Horario</h3>
+
+
+  <div class="horario">
+    <div class="horario-item">
+      <span>Lunes a Jueves</span>
+      <strong>09:00 – 23:00</strong>
+    </div>
+
+    <div class="horario-item">
+      <span>Viernes y Sábado</span>
+      <strong>09:00 – 01:00</strong>
+    </div>
+
+    <div class="horario-item">
+      <span>Domingo</span>
+      <strong>Cerrado</strong>
+    </div>
+  </div>
+</section>
 <section class="reveal">
   <h3 class="section-title reveal">Ambiente</h3>
   <div class="gallery">
