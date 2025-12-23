@@ -148,8 +148,42 @@ main{
 }
 
 @media (max-width:640px){
+
+  body{
+    overflow:auto;
+  }
+
+  main{
+    padding:0 0 40px;
+  }
+
   .grid{
-    grid-template-columns:1fr;
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns:calc(50% - 16px);
+    gap:16px;
+    padding:0 20px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+  }
+
+  .grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .card{
+    scroll-snap-align:start;
+    border-radius:20px;
+  }
+
+  .card img{
+    height:160px;
+  }
+
+  .btn{
+    width:100%;
+    padding:14px 0;
+    font-size:1rem;
   }
 }
 
@@ -272,4 +306,5 @@ function abrir(id){
 
 </body>
 </html>
+
 
