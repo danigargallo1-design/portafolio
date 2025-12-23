@@ -26,9 +26,8 @@
 
 /* ================= BODY ================= */
 body{
-  height:100vh;
+  min-height:100vh;
   color:var(--text);
-  overflow:hidden;
   background:
     radial-gradient(circle at top, #1b1b1f, #0b0b0d 70%);
 }
@@ -48,9 +47,9 @@ body::before{
 
 /* ================= WRAPPER ================= */
 .wrapper{
-  height:100vh;
+  min-height:100vh;
   display:grid;
-  grid-template-rows:28% 1fr;
+  grid-template-rows:auto 1fr;
 }
 
 /* ================= HEADER ================= */
@@ -153,6 +152,61 @@ main{
     grid-template-columns:1fr;
   }
 }
+
+/* ================= MOBILE OPTIMIZATION ================= */
+@media (max-width:640px){
+
+  body{
+    overflow:auto;
+  }
+
+  .wrapper{
+    min-height:100vh;
+    grid-template-rows:auto 1fr;
+  }
+
+  header{
+    padding:24px 20px 12px;
+  }
+
+  header h1{
+    font-size:2rem;
+    line-height:1.2;
+  }
+
+  header p{
+    font-size:.95rem;
+    margin-top:8px;
+  }
+
+  main{
+    padding:0 20px 40px;
+    align-items:flex-start;
+  }
+
+  .grid{
+    gap:24px;
+  }
+
+  .card{
+    border-radius:20px;
+  }
+
+  .card img{
+    height:180px;
+  }
+
+  .content{
+    padding:20px;
+  }
+
+  .btn{
+    width:100%;
+    padding:14px 0;
+    font-size:1rem;
+  }
+}
+
 </style>
 
 </head>
@@ -218,3 +272,4 @@ function abrir(id){
 
 </body>
 </html>
+
