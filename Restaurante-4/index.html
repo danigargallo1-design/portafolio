@@ -775,6 +775,57 @@ footer {
   }
 }
 
+/* ===================== */
+/* HORARIOS */
+/* ===================== */
+#horarios {
+  background: #f4f4f4;
+  text-align: center;
+}
+
+.horarios-box {
+  max-width: 520px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.horarios-box .dia {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 22px;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #eee;
+}
+
+.horarios-box .dia:last-child {
+  border-bottom: none;
+}
+
+.horarios-box span {
+  color: #666;
+}
+
+.horarios-box strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .horarios-box {
+    margin: 0 10px;
+  }
+
+  .horarios-box .dia {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -820,6 +871,25 @@ document.getElementById('btnWhatsapp').addEventListener('click', () => {
 </script>
 </div>
 </section>
+<section id="horarios" class="fade-in">
+  <h2>Horario de Apertura</h2>
+
+  <div class="horarios-box">
+    <div class="dia">
+      <span>Lunes a Viernes</span>
+      <strong>7:00 – 18:00</strong>
+    </div>
+    <div class="dia">
+      <span>Sábados</span>
+      <strong>8:30 – 14:00</strong>
+    </div>
+    <div class="dia">
+      <span>Domingos y Festivos</span>
+      <strong>Cerrado</strong>
+    </div>
+  </div>
+</section>
+
 
 <section id="contacto" class="fade-in">
     <h2>Contacto</h2>
