@@ -482,6 +482,56 @@ button, a{
   }
 }
 
+/* ================= HORARIOS ================= */
+
+#horarios{
+  background:#ecebe7;
+}
+
+.horarios-box{
+  max-width:520px;
+  margin:auto;
+  background:#fff;
+  border-radius:16px;
+  padding:26px;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+}
+
+.horarios-box .dia{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+  font-size:.95rem;
+}
+
+.horarios-box .dia:last-child{
+  border-bottom:none;
+}
+
+.horarios-box span{
+  font-weight:600;
+  color:#1f1f1f;
+}
+
+.horarios-box strong{
+  font-weight:500;
+  color:#444;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .horarios-box{
+    margin:0 16px;
+    padding:22px;
+  }
+
+  .horarios-box .dia{
+    font-size:.9rem;
+  }
+}
+
 </style>
 </head>
 
@@ -527,6 +577,55 @@ button, a{
     <span>Hamburguesas</span>
   </button>
 </div>
+
+</section>
+
+<section id="horarios">
+  <h2>Horario</h2>
+
+  <div class="horarios-box">
+    <div class="dia">
+      <span>Lunes</span>
+      <strong>Cerrado</strong>
+    </div>
+    <div class="dia">
+      <span>Martes</span>
+      <strong>7:30 – 16:00</strong>
+    </div>
+    <div class="dia">
+      <span>Miércoles</span>
+      <strong>7:30 – 16:00</strong>
+    </div>
+    <div class="dia">
+      <span>Jueves</span>
+      <strong>7:30 – 16:00 · 19:00 – 23:00</strong>
+    </div>
+    <div class="dia">
+      <span>Viernes</span>
+      <strong>7:30 – 16:00 · 19:00 – 00:00</strong>
+    </div>
+    <div class="dia">
+      <span>Sábado</span>
+      <strong>9:00 – 00:00</strong>
+    </div>
+    <div class="dia">
+      <span>Domingo</span>
+      <strong>9:00 – 16:00</strong>
+    </div>
+  </div>
+</section>
+
+<section id="ubicacion">
+  <h2>Dónde estamos</h2>
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2394.986468486506!2d-0.885451974943643!3d41.653199379467026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914ebe7b67797%3A0x9a810fee3fb84ad1!2sPlaza%20San%20Roque%2C%20Casco%20Antiguo%2C%20Zaragoza!5e1!3m2!1ses!2ses!4v1766353768878!5m2!1ses!2ses"
+  width="100%"
+  height="380"
+  style="border:0;"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
 
 </section>
 
@@ -720,20 +819,6 @@ actualizarMedia();
 
 </script>
 
-
-<section id="ubicacion">
-  <h2>Dónde estamos</h2>
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2394.986468486506!2d-0.885451974943643!3d41.653199379467026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914ebe7b67797%3A0x9a810fee3fb84ad1!2sPlaza%20San%20Roque%2C%20Casco%20Antiguo%2C%20Zaragoza!5e1!3m2!1ses!2ses!4v1766353768878!5m2!1ses!2ses"
-  width="100%"
-  height="380"
-  style="border:0;"
-  allowfullscreen=""
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade">
-</iframe>
-
-</section>
 
 <section>
   <h2>Contacto</h2>
