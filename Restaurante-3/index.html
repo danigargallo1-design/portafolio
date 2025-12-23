@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bar La Esquina</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Montserrat',sans-serif;
+  background:#ecebe7;              /* gris cálido profesional */
+  color:#1f1f1f;
+  line-height:1.6;
+}
+
+/* HEADER */
+header{
+  height:65vh;                     /* más contenido */
+  background:url('https://cdn.prod.website-files.com/61b21d4c816d9bbab3caefa7/6384f69227d8bbf604fd2fae_tipos-de-bar.jpg') center/cover no-repeat;
+  position:relative;
+}
+
+header::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);      /* más sobrio */
+}
+
+.nav{
+  position:absolute;
+  top:22px;
+  left:22px;
+  z-index:2;
+  color:#fff;
+  font-weight:600;                 /* menos agresivo */
+  font-size:1.4rem;
+  letter-spacing:.4px;
+}
+
+.hero{
+  position:absolute;
+  bottom:70px;
+  left:22px;
+  z-index:2;
+  color:#fff;
+  max-width:520px;
+}
+
+.hero h1{
+  font-size:2.2rem;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.hero p{
+  font-size:.95rem;
+  opacity:.9;
+  margin-bottom:22px;
+}
+
+.hero button{
+  padding:12px 26px;
+  border:none;
+  border-radius:4px;               /* más serio */
+  font-weight:600;
+  font-size:.95rem;
+  cursor:pointer;
+  background:#1f7a4d;              /* verde apagado */
+  color:#fff;
+}
+
+/* SECCIONES */
+section{
+  padding:70px 20px;               /* más aire = más calidad */
+}
+
+h2{
+  text-align:center;
+  margin-bottom:40px;
+  font-size:1.6rem;
+  font-weight:600;
+}
+
+/* ACCIONES RAPIDAS */
+.quick-actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  max-width:900px;
+  margin:auto;
+}
+
+.quick-actions button{
+  padding:18px;
+  border-radius:8px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  background:#1b1b1b;
+  color:#fff;
+  font-size:.95rem;
+}
+
+/* CARTA */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  max-width:900px;
+  margin:auto;
+}
+
+.menu-grid button{
+  position:relative;
+  height:210px;                    /* un poco más elegante */
+  border:none;
+  border-radius:14px;
+  overflow:hidden;
+  cursor:pointer;
+  padding:0;
+  box-shadow:0 10px 22px rgba(0,0,0,.08); /* sombra profesional */
+}
+
+.menu-grid button img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 40%;
+  display:block;
+  transition:transform .5s ease;
+}
+
+.menu-grid button:hover img{
+  transform:scale(1.04);           /* hover sutil */
+}
+
+.menu-grid button span{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-family:'Playfair Display', serif;
+  font-size:1.65rem;
+  font-weight:600;
+  letter-spacing:.4px;
+  text-transform:capitalize;
+
+  color:#fff;
+  text-align:center;
+
+  background:rgba(0,0,0,.5);
+  text-shadow:0 3px 12px rgba(0,0,0,.6);
+}
+
+/* MAPA */
+iframe{
+  width:100%;
+  height:380px;
+  border:none;
+  border-radius:14px;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+}
+
+/* FOOTER */
+footer{
+  background:#1a1a1a;
+  color:#cfcfcf;
+  text-align:center;
+  padding:30px 20px;
+  font-size:.85rem;
+}
+
+/* MODAL */
+#modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+#modal img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:14px;
+}
+
+#close{
+  position:absolute;
+  top:22px;
+  right:32px;
+  font-size:2rem;
+  color:#fff;
+  cursor:pointer;
+}
+
+@media (max-width: 768px){
+
+  /* HEADER / IMAGEN */
+  header{
+    height:60vh;                    /* controla hasta dónde baja la imagen */
+    min-height:380px;
+    background-position:center top;
+  }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    left:auto;
+    bottom:auto;
+    padding:16px;
+    max-width:100%;
+  }
+
+  .hero h1{
+    font-size:1.6rem;
+    line-height:1.25;
+  }
+
+  .hero p{
+    font-size:.9rem;
+  }
+
+  .hero button{
+    padding:11px 18px;
+    font-size:.9rem;
+  }
+
+  /* BOTONES RÁPIDOS */
+  .quick-actions{
+    grid-template-columns:1fr;
+    padding:20px;
+    gap:14px;
+  }
+
+  .quick-actions button{
+    padding:16px;
+    font-size:1rem;
+    border-radius:10px;
+  }
+
+  /* SECCIONES */
+  section{
+    padding:50px 16px;
+  }
+
+  /* CARTA */
+  .menu-grid{
+    grid-template-columns:1fr;
+  }
+
+  .menu-grid button{
+    height:190px;
+  }
+
+  /* MAPA */
+  iframe{
+    height:300px;
+    border-radius:10px;
+  }
+
+}
+@media (max-width: 768px){
+
+  .hero{
+    padding-top:250px;   /* baja SOLO las letras y el botón */
+  }
+
+}
+
+/* Quitar highlight azul en móvil */
+*{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Quitar borde azul al pulsar */
+button, a{
+  outline: none;
+  box-shadow: none;
+}
+
+/* ================= RESEÑAS ================= */
+
+#resenas{
+  max-width:900px;
+  margin:auto;
+}
+
+#resenas .section-title{
+  text-align:center;
+  font-size:1.4rem;
+  font-weight:600;
+  margin-bottom:18px;
+}
+
+/* Media */
+.media-resenas{
+  text-align:center;
+  font-size:.9rem;
+  opacity:.75;
+  margin-bottom:34px;
+}
+
+/* Grid reseñas */
+.resenas{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+/* Tarjeta reseña */
+.resena{
+  position:relative;
+  background:#fff;
+  padding:22px 22px 46px;
+  border-radius:14px;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+  font-size:.9rem;
+}
+
+/* Estrellas */
+.resena .valoracion{
+  color:#f5b301;
+  font-size:1rem;
+  margin-bottom:10px;
+}
+
+/* Texto */
+.resena .texto{
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
+/* Nombre fijo abajo */
+.resena .nombre{
+  position:absolute;
+  bottom:16px;
+  left:22px;
+  font-weight:600;
+  font-size:.85rem;
+  opacity:.7;
+}
+
+/* ================= BOTÓN PAPELERA ================= */
+
+.btn-trash{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:28px;
+  height:28px;
+  border:none;
+  border-radius:6px;
+  background:#ecebe7;
+  cursor:pointer;
+}
+
+.btn-trash::before{
+  content:"✕";
+  font-size:.85rem;
+  color:#333;
+}
+
+.btn-trash:hover{
+  background:#dedbd4;
+}
+
+/* ================= BOTONES ================= */
+
+.add-resena{
+  text-align:center;
+  margin-top:32px;
+}
+
+/* Escribir reseña (secundario) */
+.add-resena .btn-whatsapp{
+  width:auto;
+  padding:10px 18px;
+  font-size:.85rem;
+  border-radius:6px;
+  background:#1b1b1b;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+
+/* ================= FORMULARIO ================= */
+
+.form-resena{
+  display:none;
+  max-width:520px;
+  margin:26px auto 0;
+  background:#fff;
+  padding:26px;
+  border-radius:14px;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+}
+
+.form-resena input,
+.form-resena textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-family:'Montserrat',sans-serif;
+  font-size:.9rem;
+  margin-bottom:14px;
+}
+
+.form-resena textarea{
+  min-height:110px;
+  resize:none;
+}
+
+/* Publicar reseña (principal) */
+.form-resena button{
+  width:100%;
+  padding:16px;
+  font-size:1rem;
+  font-weight:700;
+  border-radius:10px;
+  background:#1b1b1b;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+
+/* ================= ESTRELLAS ================= */
+
+/* Estrellas en reseñas */
+.resena .valoracion{
+  color:#1b1b1b;
+}
+
+/* Selector de estrellas */
+.estrellas span{
+  color:#ccc;
+}
+
+.estrellas span.activa{
+  color:#1b1b1b;
+}
+
+
+/* ================= TOAST ================= */
+
+#toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#1b1b1b;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:30px;
+  font-size:.85rem;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+  z-index:9999;
+}
+
+#toast.mostrar{
+  opacity:1;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+  .form-resena{
+    margin:20px 16px 0;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">Bar La Esquina</div>
+
+  <div class="hero">
+    <h1>Desayunos, bocadillos y cañas bien frías</h1>
+    <p>Comida de siempre, buen ambiente y trato cercano.</p>
+    <button onclick="whatsapp()">Reservar por WhatsApp</button>
+  </div>
+</header>
+
+<section class="quick-actions">
+  <button onclick="scrollToId('carta')">Ver Carta</button>
+  <button onclick="whatsapp()">WhatsApp</button>
+  <button onclick="scrollToId('ubicacion')">Cómo llegar</button>
+</section>
+
+<section id="carta">
+  <h2>Nuestra Carta</h2>
+
+  <div class="menu-grid">
+  <button onclick="abrirModal('https://ingenieriademenu.com/wp-content/uploads/2023/09/Plantilla-carta-bar-gratis-724x1024.png')">
+    <img src="https://www.uoc.edu/content/dam/news/images/noticies/2024/entrepa.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg">
+    <span>Bocadillos</span>
+  </button>
+
+  <button onclick="abrirModal('https://marketplace.canva.com/EAFQ9m1lcCY/1/0/1131w/canva-men%C3%BA-de-desayunos-sencillo-blanco-7cd_ykoBuOE.jpg')">
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+    <span>Desayunos</span>
+  </button>
+
+  <button onclick="abrirModal('https://images.squarespace-cdn.com/content/v1/530c9c9ee4b0ee3839705827/040f64d8-5aa6-4a27-9ca8-358f1f7cbc66/bebidas+web+cast.jpg')">
+    <img src="https://www.noticiasneo.com/sites/default/files/2023-01/bebidasNAok.png">
+    <span>Bebidas</span>
+  </button>
+
+  <button onclick="abrirModal('https://marketplace.canva.com/EAF87Dru6LM/1/0/1131w/canva-men%C3%BA-hamburguesas-moderno-negro-y-amarillo-yvFOtSczmnw.jpg')">
+    <img src="https://www.clarin.com/img/2021/06/17/LC25eDtCT_1200x630__1.jpg">
+    <span>Hamburguesas</span>
+  </button>
+</div>
+
+</section>
+
+<section id="resenas" class="reveal">
+  <h3 class="section-title">Lo que dice la gente</h3>
+
+  <div class="media-resenas">
+    <strong><span id="mediaValor">0.0</span></strong> / 5
+    <span class="contador">· <span id="totalResenas">0</span> reseñas</span>
+  </div>
+
+  <div class="resenas" id="listaResenas">
+    <!-- Reseñas fijas -->
+    <div class="resena fija" data-puntos="5">
+      <div class="valoracion">★★★★★</div>
+      <p class="texto">Buen bar.</p>
+      <span class="nombre">— Marcos G.</span>
+    </div>
+
+    <div class="resena fija" data-puntos="5">
+      <div class="valoracion">★★★★★</div>
+      <p class="texto">De los mejores barrios del actur.</p>
+      <span class="nombre">— Samuel R.</span>
+    </div>
+
+    <div class="resena fija" data-puntos="4">
+      <div class="valoracion">★★★★☆</div>
+      <p class="texto">Una web impecable.</p>
+      <span class="nombre">— Pablo L.</span>
+    </div>
+  </div>
+
+  <div class="add-resena">
+    <button class="btn-whatsapp" onclick="mostrarFormulario()">Escribir reseña</button>
+  </div>
+
+  <form id="formResena" class="form-resena" onsubmit="agregarResena(event)">
+    <input type="text" id="nombre" placeholder="Tu nombre" required>
+
+    <div class="estrellas">
+      <span onclick="seleccionarEstrella(1)">★</span>
+      <span onclick="seleccionarEstrella(2)">★</span>
+      <span onclick="seleccionarEstrella(3)">★</span>
+      <span onclick="seleccionarEstrella(4)">★</span>
+      <span onclick="seleccionarEstrella(5)">★</span>
+    </div>
+
+    <textarea id="texto" placeholder="Tu reseña" required></textarea>
+    <button type="submit" class="btn-whatsapp">Publicar reseña</button>
+  </form>
+</section>
+
+<div id="toast"></div>
+
+<script>
+/* ================= ESTADO ================= */
+let puntuacionSeleccionada = 0;
+
+/* ================= UTILIDADES ================= */
+function generarEstrellas(valor){
+  let out = "";
+  for(let i = 1; i <= 5; i++){
+    out += i <= valor ? "★" : "☆";
+  }
+  return out;
+}
+
+/* ================= UI ================= */
+function mostrarFormulario(){
+  formResena.style.display = "block";
+}
+
+function seleccionarEstrella(n){
+  puntuacionSeleccionada = n;
+  document.querySelectorAll(".estrellas span").forEach((s, i) => {
+    s.classList.toggle("activa", i < n);
+  });
+}
+
+function mostrarToast(msg){
+  toast.textContent = msg;
+  toast.classList.add("mostrar");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => toast.classList.remove("mostrar"), 3000);
+}
+
+/* ================= AÑADIR ================= */
+function agregarResena(e){
+  e.preventDefault();
+
+  if(!puntuacionSeleccionada){
+    mostrarToast("Selecciona una puntuación");
+    return;
+  }
+
+  const nombre = nombreInput.value.trim();
+  const texto = textoInput.value.trim();
+
+  const r = document.createElement("div");
+  r.className = "resena";
+  r.dataset.puntos = puntuacionSeleccionada;
+
+  r.innerHTML = `
+    <div class="valoracion">${generarEstrellas(puntuacionSeleccionada)}</div>
+    <p class="texto">${texto}</p>
+    <span class="nombre">— ${nombre}</span>
+    <button class="btn-trash" onclick="borrarResena(this)" aria-label="Eliminar reseña"></button>
+  `;
+
+  listaResenas.appendChild(r);
+
+  guardarDesdeDOM();       // ✅ ÚNICA FUENTE DE STORAGE
+  actualizarMedia();
+
+  formResena.reset();
+  formResena.style.display = "none";
+  puntuacionSeleccionada = 0;
+  document.querySelectorAll(".estrellas span").forEach(s => s.classList.remove("activa"));
+
+  mostrarToast("Reseña publicada");
+}
+
+/* ================= BORRAR ================= */
+function borrarResena(btn){
+  const resena = btn.closest(".resena");
+  if (!resena || resena.classList.contains("fija")) return;
+
+  resena.remove();
+  guardarDesdeDOM();
+  actualizarMedia();
+  mostrarToast("Reseña eliminada");
+}
+
+/* ================= STORAGE ================= */
+function guardarDesdeDOM(){
+  const arr = [];
+  document.querySelectorAll(".resena:not(.fija)").forEach(r => {
+    arr.push({
+      nombre: r.querySelector(".nombre").innerText.replace("— ",""),
+      texto: r.querySelector(".texto").innerText,
+      puntos: r.dataset.puntos
+    });
+  });
+  localStorage.setItem("resenas", JSON.stringify(arr));
+}
+
+function cargarResenas(){
+  const arr = JSON.parse(localStorage.getItem("resenas")) || [];
+  arr.forEach(r => {
+    const d = document.createElement("div");
+    d.className = "resena";
+    d.dataset.puntos = r.puntos;
+    d.innerHTML = `
+      <div class="valoracion">${generarEstrellas(r.puntos)}</div>
+      <p class="texto">${r.texto}</p>
+      <span class="nombre">— ${r.nombre}</span>
+      <button class="btn-trash" onclick="borrarResena(this)" aria-label="Eliminar reseña"></button>
+    `;
+    listaResenas.appendChild(d);
+  });
+}
+
+/* ================= MEDIA ================= */
+function actualizarMedia(){
+  let total = 0;
+  let suma = 0;
+
+  document.querySelectorAll(".resena").forEach(r => {
+    const puntos = Number(r.dataset.puntos);
+    if(!isNaN(puntos)){
+      suma += puntos;
+      total++;
+    }
+  });
+
+  totalResenas.textContent = total;
+  mediaValor.textContent = total ? (suma / total).toFixed(1) : "0.0";
+}
+
+/* ================= INIT ================= */
+const listaResenas   = document.getElementById("listaResenas");
+const formResena     = document.getElementById("formResena");
+const nombreInput    = document.getElementById("nombre");
+const textoInput     = document.getElementById("texto");
+const totalResenas   = document.getElementById("totalResenas");
+const mediaValor     = document.getElementById("mediaValor");
+const toast          = document.getElementById("toast");
+
+cargarResenas();
+actualizarMedia();
+
+</script>
+
+
+<section id="ubicacion">
+  <h2>Dónde estamos</h2>
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2394.986468486506!2d-0.885451974943643!3d41.653199379467026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914ebe7b67797%3A0x9a810fee3fb84ad1!2sPlaza%20San%20Roque%2C%20Casco%20Antiguo%2C%20Zaragoza!5e1!3m2!1ses!2ses!4v1766353768878!5m2!1ses!2ses"
+  width="100%"
+  height="380"
+  style="border:0;"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+</section>
+
+<section>
+  <h2>Contacto</h2>
+  <p style="text-align:center">📍 Avenida Roma, Zaragoza<br>📞 643 613 245</p>
+</section>
+
+<footer>
+  © 2025 Bar La Esquina
+</footer>
+
+<div id="modal">
+  <span id="close">&times;</span>
+  <img id="modalImg">
+</div>
+
+<script>
+function whatsapp(){
+  window.open('https://wa.me/34643613245','_blank');
+}
+function scrollToId(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+</script>
+<script>
+function abrirModal(src){
+  const modal = document.getElementById("modal");
+  const img = document.getElementById("modalImg");
+  img.src = src;
+  modal.style.display = "flex";
+}
+
+document.getElementById("close").onclick = () => {
+  document.getElementById("modal").style.display = "none";
+};
+
+document.getElementById("modal").onclick = e => {
+  if(e.target.id === "modal"){
+    document.getElementById("modal").style.display = "none";
+  }
+};
+</script>
+
+</body>
+</html>

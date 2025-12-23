@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel Admin | Reservas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  font-family:'Montserrat',sans-serif;
+  background:#f4f4f4;
+  padding:20px;
+}
+
+h1{
+  margin-bottom:20px;
+}
+
+.reserva{
+  background:white;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.info{
+  font-size:.9rem;
+  line-height:1.4;
+}
+
+.info strong{
+  font-size:1rem;
+}
+
+.acciones{
+  display:flex;
+  gap:8px;
+}
+
+.badge{
+  background:#25D366;
+  color:white;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:.75rem;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+}
+
+.badge:hover{
+  background:#1ebe5d;
+}
+
+.borrar{
+  background:#e74c3c;
+  color:white;
+  border:none;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:.75rem;
+  cursor:pointer;
+}
+
+.borrar:hover{
+  background:#c0392b;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📋 Panel de reservas</h1>
+
+<div id="lista"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  updateDoc,
+  increment
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB5YE3HZRdRlmGEMajZVBMeZzGmdlExf9I",
+  authDomain: "el-condor-b07c5.firebaseapp.com",
+  projectId: "el-condor-b07c5",
+  storageBucket: "el-condor-b07c5.firebasestorage.app",
+  messagingSenderId: "529637701842",
+  appId: "1:529637701842:web:b852858a84038b3a55950b"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const lista = document.getElementById("lista");
+
+const snap = await getDocs(collection(db,"reservas"));
+
+if (snap.empty) {
+  lista.innerHTML = "<p>No hay reservas</p>";
+}
+
+snap.forEach(d => {
+  const r = d.data();
+
+  const telefonoLimpio = (r.telefono || "").replace(/\D/g,"");
+  const mensaje = encodeURIComponent(
+`Hola ${r.nombre} 👋
+Te escribimos de La Antigua Mesa
+Sobre tu reserva:
+📅 ${r.fecha}
+⏰ ${r.hora}`
+  );
+
+  const div = document.createElement("div");
+  div.className = "reserva";
+
+  div.innerHTML = `
+    <div class="info">
+      <strong>📅 ${r.fecha} — ⏰ ${r.hora}</strong><br>
+      👤 ${r.nombre}<br>
+      👥 ${r.personas} personas<br>
+      📞 ${r.telefono ?? ""}
+    </div>
+
+    <div class="acciones">
+      <a class="badge"
+         href="https://wa.me/${telefonoLimpio}?text=${mensaje}"
+         target="_blank">
+        💬 WhatsApp
+      </a>
+
+      <button class="borrar">🗑️</button>
+    </div>
+  `;
+
+  // 🔥 BORRAR RESERVA + LIBERAR AFORO
+  div.querySelector(".borrar").onclick = async () => {
+    if(!confirm("¿Borrar esta reserva y liberar aforo?")) return;
+
+    try{
+      // 1️⃣ restar personas del aforo
+      const aforoId = `${r.fecha}_${r.hora}`;
+      const aforoRef = doc(db,"aforo",aforoId);
+
+      await updateDoc(aforoRef,{
+        ocupadas: increment(-r.personas)
+      });
+
+      // 2️⃣ borrar reserva
+      await deleteDoc(doc(db,"reservas",d.id));
+
+      // 3️⃣ quitar del DOM
+      div.remove();
+
+    }catch(err){
+      console.error(err);
+      alert("Error al borrar la reserva");
+    }
+  };
+
+  lista.appendChild(div);
+});
+</script>
+
+</body>
+</html>

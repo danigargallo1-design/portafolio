@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reservas | La Antigua Mesa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================
+   BASE HEIGHT
+========================= */
+html, body{
+  height: 100%;
+}
+
+/* =========================
+   VARIABLES
+========================= */
+:root{
+  --marron: #7a4a2e;
+  --oscuro: #1e1a17;
+  --verde:  #2f7a55;
+  --gris:   #bbb;
+}
+
+/* =========================
+   RESET
+========================= */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+body{
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(180deg, #f7f2ea, #efe8dc);
+  color: var(--oscuro);
+}
+
+/* =========================
+   TOP BAR
+========================= */
+.topbar{
+  height: 48px;
+  padding: 20px 24px 0;
+}
+
+.topbar a{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  color: var(--oscuro);
+  text-decoration: none;
+
+  opacity: .75;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.topbar a::before{
+  content: "←";
+  font-size: 1rem;
+  opacity: .7;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.topbar a:hover{
+  opacity: 1;
+  transform: translateX(-2px);
+}
+
+.topbar a:hover::before{
+  opacity: 1;
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 48px);
+  padding: 20px;
+}
+
+.contenedor{
+  width: 100%;
+  max-width: 900px;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header{
+  text-align: center;
+  margin-bottom: 20px;   /* antes 32px */
+}
+
+.header h1{
+  font-size: 2.2rem;     /* antes 2.6rem */
+  letter-spacing: .06em;
+}
+
+.header .subtitulo{
+  margin-top: 6px;
+  font-size: .85rem;
+}
+
+/* =========================
+   CARD CALENDARIO
+========================= */
+.card{
+  background: #fffdf9;
+  border-radius: 24px;
+  padding: 28px;
+  border: 1px solid rgba(0,0,0,.04);
+  box-shadow: 0 20px 40px rgba(0,0,0,.12);
+}
+
+/* =========================
+   MES / NAVEGACIÓN
+========================= */
+.mes-barra{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mes-barra button{
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--marron);
+  cursor: pointer;
+  transition: opacity .2s ease;
+}
+
+.mes-barra button:hover{
+  opacity: .6;
+}
+
+/* =========================
+   SEMANA
+========================= */
+.semana{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: .75rem;
+  letter-spacing: .05em;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+.semana div{
+  text-align: center;
+  font-weight: 600;
+}
+
+/* =========================
+   DÍAS
+========================= */
+.dias{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.dia{
+  padding: 16px 0;
+  border-radius: 14px;
+  text-align: center;
+  font-weight: 600;
+  font-size: .95rem;
+  transition: all .25s ease;
+}
+
+/* Estados */
+.libre{
+  background: #f5eee6;
+  color: var(--marron);
+  cursor: pointer;
+}
+
+.libre:hover{
+  background: #eadfce;
+}
+
+.pasado{
+  background: #f0f0f0;
+  color: var(--gris);
+}
+
+.seleccionado{
+  background: var(--marron) !important;
+  color: white;
+}
+
+/* =========================
+   MODAL
+========================= */
+#modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal{
+  background: #fff;
+  padding: 28px;
+  width: 92%;
+  max-width: 380px;
+  border-radius: 24px;
+}
+
+/* =========================
+   MODAL TITULO
+========================= */
+.modal-titulo{
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 1.2rem;
+  letter-spacing: .08em;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+.modal input,
+.modal select{
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 14px;
+  background: #f7f2ea;
+  font-size: .9rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* =========================
+   ACCIONES
+========================= */
+.acciones{
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.confirmar,
+.cancelar{
+  flex: 1;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.confirmar{
+  background: var(--marron);
+  color: white;
+  text-transform: uppercase;
+}
+
+.confirmar:hover{
+  opacity: .85;
+}
+
+.cancelar{
+  background: transparent;
+  border: 1px solid #ccc;
+}
+
+.cancelar:hover{
+  background: #eee;
+}
+/* =========================
+   MOBILE OPTIMIZATION
+========================= */
+@media (max-width: 768px){
+
+  /* -------------------------
+     TOPBAR
+  ------------------------- */
+  .topbar{
+    height: 44px;
+    padding: 12px 16px 0;
+  }
+
+  .topbar a{
+    font-size: .75rem;
+    letter-spacing: .1em;
+  }
+
+  /* -------------------------
+     HEADER
+  ------------------------- */
+  .header{
+    margin-bottom: 20px;
+  }
+
+  .header h1{
+    font-size: 1.8rem;
+    letter-spacing: .06em;
+  }
+
+  .header .subtitulo{
+    font-size: .8rem;
+    margin-top: 6px;
+  }
+
+  /* -------------------------
+     CARD / CALENDARIO
+  ------------------------- */
+  .card{
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .semana{
+    font-size: .7rem;
+    margin-bottom: 8px;
+  }
+
+  .dias{
+    gap: 8px;
+  }
+
+  .dia{
+    padding: 12px 0;
+    font-size: .85rem;
+    border-radius: 12px;
+  }
+
+  /* -------------------------
+     MODAL
+  ------------------------- */
+  .modal{
+    width: 94%;
+    max-width: none;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .modal-titulo{
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+  }
+
+  .modal input,
+  .modal select{
+    padding: 12px;
+    font-size: .85rem;
+  }
+
+  /* -------------------------
+     BOTONES
+  ------------------------- */
+  .acciones{
+    flex-direction: column;
+  }
+
+  .confirmar,
+  .cancelar{
+    width: 100%;
+    padding: 14px;
+    font-size: .85rem;
+  }
+
+  /* -------------------------
+     UX FIX iOS / ANDROID
+  ------------------------- */
+  input,
+  select,
+  button{
+    font-size: 16px;
+  }
+}
+/* =========================
+   REMOVE MOBILE HIGHLIGHTS (FULL)
+========================= */
+
+/* Android / Chrome tap highlight */
+*{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS focus ring */
+*:focus{
+  outline: none;
+}
+
+/* Safari iOS blue glow */
+button,
+a,
+input,
+select,
+textarea{
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Remove focus ring on click (but keep accessibility sane) */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible){
+  outline: none;
+  box-shadow: none;
+}
+
+/* Optional: subtle active feedback */
+button:active,
+a:active{
+  opacity: .75;
+}
+
+</style>
+
+
+
+
+</head>
+
+<body>
+
+<div class="topbar">
+    <a href="index.html">Volver</a>
+</div>
+
+<main>
+<div class="contenedor">
+
+<div class="header">
+  <h1>Reservas</h1>
+  <p class="subtitulo">Seleccione día y hora</p>
+</div>
+
+
+<div class="card">
+    <div class="mes-barra">
+        <button onclick="cambiarMes(-1)">‹</button>
+        <div id="mes"></div>
+        <button onclick="cambiarMes(1)">›</button>
+    </div>
+
+    <div class="semana">
+        <div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+    </div>
+
+    <div class="dias" id="dias"></div>
+</div>
+
+</div>
+</main>
+
+<div id="modal" onclick="cerrarModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 class="modal-titulo">Confirmar reserva</h3>
+
+        <form id="formReserva">
+            <input id="nombre" placeholder="Nombre" required>
+            <input id="telefono" placeholder="Teléfono" required>
+            <select id="personas" required></select>
+            <select id="hora" required></select>
+
+            <div class="acciones">
+                <button type="button" class="cancelar" onclick="cerrarModal()">Cancelar</button>
+                <button type="submit" class="confirmar" id="btnConfirmar">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  increment,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* =======================
+   FIREBASE
+======================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyB5YE3HZRdRlmGEMajZVBMeZzGmdlExf9I",
+  authDomain: "el-condor-b07c5.firebaseapp.com",
+  projectId: "el-condor-b07c5",
+  storageBucket: "el-condor-b07c5.firebasestorage.app",
+  messagingSenderId: "529637701842",
+  appId: "1:529637701842:web:b852858a84038b3a55950b"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* =======================
+   ELEMENTOS DOM
+======================= */
+const diasEl = document.getElementById("dias");
+const mesEl = document.getElementById("mes");
+const modal = document.getElementById("modal");
+const personasEl = document.getElementById("personas");
+const horaEl = document.getElementById("hora");
+const form = document.getElementById("formReserva");
+const btn = document.getElementById("btnConfirmar");
+
+/* =======================
+   CONFIGURACIÓN
+======================= */
+const HORAS = ["13:30","14:30","20:30","21:30"];
+const LIMITE = 6;
+
+/* =======================
+   ESTADO
+======================= */
+let fecha = new Date();
+let diaSel = null;
+let enviando = false;
+
+/* =======================
+   PERSONAS
+======================= */
+for (let i = 1; i <= 10; i++) {
+  personasEl.innerHTML += `<option value="${i}">${i} persona${i>1?"s":""}</option>`;
+}
+
+/* =======================
+   CALENDARIO
+======================= */
+function render(){
+  diasEl.innerHTML = "";
+  mesEl.textContent = fecha
+    .toLocaleString("es",{month:"long",year:"numeric"})
+    .toUpperCase();
+
+  const y = fecha.getFullYear();
+  const m = fecha.getMonth();
+  const first = (new Date(y,m,1).getDay()+6)%7;
+  const total = new Date(y,m+1,0).getDate();
+  const hoy = new Date(); hoy.setHours(0,0,0,0);
+
+  for(let i=0;i<first;i++){
+    diasEl.innerHTML += `<div class="dia vacio"></div>`;
+  }
+
+  for(let d=1; d<=total; d++){
+    const div = document.createElement("div");
+    div.className = "dia";
+    div.textContent = d;
+
+    const actual = new Date(y,m,d);
+    actual.setHours(0,0,0,0);
+
+    if(actual < hoy){
+      div.classList.add("pasado");
+    }else{
+      div.classList.add("libre");
+      div.onclick = async ()=>{
+        diaSel = d;
+        await cargarHoras();
+        modal.style.display = "flex";
+      };
+    }
+
+    diasEl.appendChild(div);
+  }
+}
+
+/* =======================
+   HORAS
+======================= */
+async function cargarHoras() {
+  horaEl.innerHTML = `<option value="">Hora</option>`;
+
+  const personas = parseInt(personasEl.value, 10) || 1;
+
+  const fechaTexto =
+    `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, "0")}-${String(diaSel).padStart(2, "0")}`;
+
+  for (const h of HORAS) {
+    const ref = doc(db, "aforo", `${fechaTexto}_${h}`);
+    const snap = await getDoc(ref);
+
+    const ocupadas = snap.exists() ? (snap.data().ocupadas || 0) : 0;
+
+    // 🔑 CLAVE: depende de personas seleccionadas
+    if (ocupadas + personas <= LIMITE) {
+      horaEl.innerHTML += `<option value="${h}">${h}</option>`;
+    }
+  }
+
+  if (horaEl.children.length === 1) {
+    horaEl.innerHTML = `<option value="">No hay horas disponibles</option>`;
+  }
+}
+personasEl.addEventListener("change", () => {
+  if (diaSel) {
+    cargarHoras();
+  }
+});
+
+
+/* =======================
+   CONFIRMAR RESERVA
+======================= */
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (enviando) return;
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
+  const personas = parseInt(personasEl.value, 10);
+  const hora = horaEl.value;
+
+  if (!hora) {
+    alert("Selecciona una hora disponible");
+    return;
+  }
+
+  enviando = true;
+  btn.textContent = "Confirmando…";
+  btn.disabled = true;
+
+  try {
+    const fechaTexto =
+      `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, "0")}-${String(diaSel).padStart(2, "0")}`;
+
+    const aforoId = `${fechaTexto}_${hora}`;
+    const aforoRef = doc(db, "aforo", aforoId);
+
+    // 🔍 comprobar aforo actual
+    const snap = await getDoc(aforoRef);
+    const ocupadas = snap.exists() ? (snap.data().ocupadas || 0) : 0;
+
+    // ❌ si se acaba de llenar
+    if (ocupadas + personas > LIMITE) {
+      alert("Esta hora acaba de completarse. Selecciona otra.");
+
+      await cargarHoras();   // refresca opciones
+      horaEl.value = "";     // limpia selección
+
+      return;
+    }
+
+    // ✅ actualizar aforo
+    await setDoc(
+      aforoRef,
+      {
+        fecha: fechaTexto,
+        hora,
+        ocupadas: increment(personas),
+        limite: LIMITE
+      },
+      { merge: true }
+    );
+
+    // ✅ guardar reserva
+    await setDoc(doc(db, "reservas", crypto.randomUUID()), {
+      fecha: fechaTexto,
+      hora,
+      personas,
+      nombre,
+      telefono,
+      createdAt: serverTimestamp()
+    });
+
+    // ✅ refrescar horas tras reservar
+    await cargarHoras();
+
+    // ✅ cerrar modal y limpiar formulario
+    modal.style.display = "none";
+    form.reset();
+
+    // ✅ WhatsApp
+    const msg = `Hola 👋
+Reserva confirmada
+📅 ${fechaTexto}
+⏰ ${hora}
+👥 ${personas}
+👤 ${nombre}
+📞 ${telefono}`;
+
+    window.open(
+      `https://wa.me/34643613245?text=${encodeURIComponent(msg)}`,
+      "_blank"
+    );
+
+  } catch (err) {
+    console.error(err);
+    alert("Error al reservar. Inténtalo de nuevo.");
+  } finally {
+    enviando = false;
+    btn.textContent = "Confirmar";
+    btn.disabled = false;
+  }
+});
+
+
+/* =======================
+   GLOBALS
+======================= */
+window.cambiarMes = n=>{
+  fecha.setMonth(fecha.getMonth()+n);
+  render();
+};
+window.cerrarModal = ()=> modal.style.display="none";
+
+/* =======================
+   INIT
+======================= */
+render();
+</script>
+
+</body>
+</html>

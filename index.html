@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio Restaurantes</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0b0d;
+  --card:#141418;
+  --accent:#ffb703;
+  --text:#ffffff;
+  --muted:#b1b1b1;
+}
+
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* ================= BODY ================= */
+body{
+  height:100vh;
+  color:var(--text);
+  overflow:hidden;
+  background:
+    radial-gradient(circle at top, #1b1b1f, #0b0b0d 70%);
+}
+
+/* ================= FONDO SUAVE (SIN LAG) ================= */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-20%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,183,3,.12), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,.06), transparent 50%);
+  filter:blur(50px);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* ================= WRAPPER ================= */
+.wrapper{
+  height:100vh;
+  display:grid;
+  grid-template-rows:28% 1fr;
+}
+
+/* ================= HEADER ================= */
+header{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px 40px;
+}
+
+header h1{
+  font-size:clamp(2.4rem,4vw,3.5rem);
+}
+
+header p{
+  margin-top:12px;
+  max-width:600px;
+  color:var(--muted);
+}
+
+/* ================= MAIN ================= */
+main{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 40px;
+}
+
+/* ================= GRID ================= */
+.grid{
+  width:100%;
+  max-width:1400px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:50px;
+}
+
+/* ================= CARD ================= */
+.card{
+  background:linear-gradient(180deg,#1a1a1f,#111115);
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 28px 70px rgba(0,0,0,.7);
+}
+
+/* ================= IMAGEN ================= */
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  transition:transform .35s ease;
+}
+
+.card:hover img{
+  transform:scale(1.06);
+}
+
+/* ================= CONTENT ================= */
+.content{
+  padding:24px;
+  text-align:center;
+}
+
+/* ================= BOTÓN ================= */
+.btn{
+  margin-top:18px;
+  padding:12px 36px;
+  border-radius:40px;
+  background:var(--accent);
+  color:#000;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(255,183,3,.25);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:1024px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:32px;
+  }
+}
+
+@media (max-width:640px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<header>
+  <h1>Web para Restaurantes</h1>
+  <p>Diseño interfaces modernas, elegantes y optimizadas para convertir visitas en clientes.</p>
+</header>
+
+<main>
+<section class="grid">
+
+  <div class="card">
+    <img src="https://wallpapers.com/images/hd/old-specialty-bar-7anfhdpabiirvxj6.jpg">
+    <div class="content">
+      <h3>El buen trago</h3>
+      <button class="btn" onclick="abrir(1)">Ver proyecto</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1518188770546-efd25d4ca263">
+    <div class="content">
+      <h3>La Antigua Mesa</h3>
+      <button class="btn" onclick="abrir(2)">Ver proyecto</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://cdn.prod.website-files.com/61b21d4c816d9bbab3caefa7/6384f69227d8bbf604fd2fae_tipos-de-bar.jpg">
+    <div class="content">
+      <h3>Bar La Esquina</h3>
+      <button class="btn" onclick="abrir(3)">Ver proyecto</button>
+    </div>
+  </div>
+
+    <div class="card">
+    <img src="https://elreal.es/wp-content/uploads/2025/02/Diseno-sin-titulo-49.jpg">
+    <div class="content">
+      <h3>El sabor</h3>
+      <button class="btn" onclick="abrir(4)">Ver proyecto</button>
+    </div>
+  </div>
+
+</section>
+</main>
+
+</div>
+
+<script>
+function abrir(id){
+  if(id === 1) location.href = "Restaurante-1/";
+  if(id === 2) location.href = "Restaurante-2/";
+  if(id === 3) location.href = "Restaurante-3/";
+  if(id === 4) location.href = "Restaurante-4/";
+}
+</script>
+
+
+</body>
+</html>
